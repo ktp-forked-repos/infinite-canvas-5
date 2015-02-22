@@ -69,7 +69,7 @@ app.configure 'production', ->
 
   app.db.on 'error', console.error.bind(console, 'mongoose connection error: ')
   app.db.once 'open', ->
-    console.log "mongodb connected"
+    console.log "mongodb connected" , config.mongodb.uri
 
 # Start Server
 app.listen 9000, ->
