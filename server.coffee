@@ -10,7 +10,7 @@ config        = require "./config"
 
 app = express.createServer()
 io = require('socket.io')(app)
-
+app.set('PORT', 9000)
 app.db = mongoose.createConnection(config.mongodb.uri)
 require('./models')(app, mongoose)
 
@@ -67,8 +67,8 @@ app.configure 'production', ->
   app.get '/', (req, res, next) ->
     res.sendfile 'index.html', root: './public'
 # Start Server
-app.listen 9000, ->
-  console.log "server running on port 9000"
+app.listen app.get('PORT'), ->
+  console.log "server running on port #{app.get('PORT')}"
 
 online = 0
 # listen to socket connections
