@@ -11,6 +11,12 @@ config        = require "./config"
 app = express.createServer()
 io = require('socket.io')(app)
 
+app.db = mongoose.createConnection(config.mongodb.uri)
+require('./models')(app, mongoose)
+
+app.db.on 'error', console.error.bind(console, 'mongoose connection error: ')
+app.db.once 'open', ->
+  console.log "mongodb connected" , config.mongodb.uri
 #setup the session store
 # app.sessionStore = new mongoStore({ url: config.mongodb.uri })
 
@@ -54,18 +60,10 @@ app.configure ->
 app.configure 'development', ->
   # Create server and DB connections
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
-  app.db = mongoose.createConnection(config.mongodb.uri)
-  require('./models')(app, mongoose)
 
-  app.db.on 'error', console.error.bind(console, 'mongoose connection error: ')
-  app.db.once 'open', ->
-    console.log "mongodb connected" , config.mongodb.uri
     
 # config express in production environment
 app.configure 'production', ->
-  # Create server and DB connections
-  app.db = mongoose.createConnection(config.mongodb.uri)
-  require('./models')(app, mongoose)
 
   app.db.on 'error', console.error.bind(console, 'mongoose connection error: ')
   app.db.once 'open', ->
