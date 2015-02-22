@@ -57,7 +57,7 @@ app.configure ->
 app.configure 'development', ->
   # Create server and DB connections
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
-  app.db = mongoose.connect(config.mongodb.uri)
+  app.db = mongoose.createConnection(config.mongodb.uri)
   require('./models')(app, mongoose)
 
   app.db.on 'error', console.error.bind(console, 'mongoose connection error: ')
@@ -67,7 +67,7 @@ app.configure 'development', ->
 # config express in production environment
 app.configure 'production', ->
   # Create server and DB connections
-  app.db = mongoose.connect('mongodb://' + process.env.MONGOLAB_URI)
+  app.db = mongoose.createConnection('mongodb://' + process.env.MONGOLAB_URI)
   require('./models')(app, mongoose)
 
   app.db.on 'error', console.error.bind(console, 'mongoose connection error: ')
