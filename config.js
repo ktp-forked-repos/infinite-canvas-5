@@ -2,7 +2,7 @@
 
 exports.port = process.env.PORT || 9000;
 exports.mongodb = {
-  uri: 'mongodb://192.168.59.103:27017/magicuniverse'
+  uri: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://192.168.59.103:27017/magicuniverse'
 };
 exports.systemEmail = 'your@email.addy';
 exports.cryptoKey = 'k3yb0ardc4t';

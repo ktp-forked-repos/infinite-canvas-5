@@ -1,6 +1,6 @@
 # Load Dependencies
 express       = require 'express'
-mongoStore    = require('connect-mongo')(express)
+# mongoStore    = require('connect-mongo')(express)
 http          = require 'http'
 path          = require 'path'
 passport      = require 'passport'
@@ -11,11 +11,7 @@ config        = require './config'
 app = express.createServer()
 io = require('socket.io')(app)
 
-# Create server and DB connections
-app.db = mongoose.createConnection(config.mongodb.uri)
-app.db.on 'error', console.error.bind(console, 'mongoose connection error: ')
-app.db.once 'open', ->
-  console.log "mongodb connected"
+
 
 # Configure Models
 require('./models')(app, mongoose)
@@ -61,7 +57,18 @@ app.configure ->
 
 # config express in dev environment
 app.configure 'development', ->
+  # Create server and DB connections
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
+  app.db = mongoose.connect(config.mongodb.uri)
+  
+# config express in production environment
+app.configure 'production', ->
+  # Create server and DB connections
+  app.db = mongoose.connect('mongodb://' + process.env.MONGOLAB_URI)
+
+app.db.on 'error', console.error.bind(console, 'mongoose connection error: ')
+app.db.once 'open', ->
+  console.log "mongodb connected"
 
 # Start Server
 app.listen 9000, ->
