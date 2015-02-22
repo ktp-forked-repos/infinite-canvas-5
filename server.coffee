@@ -64,7 +64,8 @@ app.configure 'development', ->
     
 # config express in production environment
 app.configure 'production', ->
-
+  app.get '/', (req, res, next) ->
+    res.sendfile 'index.html'
 # Start Server
 app.listen 9000, ->
   console.log "server running on port 9000"
