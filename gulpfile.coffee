@@ -11,6 +11,9 @@ ngAnnotate      = require 'gulp-ng-annotate'
 uglify          = require 'gulp-uglifyjs'
 sourcemaps      = require 'gulp-sourcemaps'
 less            = require 'gulp-less' 
+yargs           = require 'yargs'
+path            = require 'path'
+fs              = require 'fs'
 
 # Modules required for the livereload - express, connect, tiny-lr, etc
 minifyHTML      = require 'gulp-minify-html'
@@ -122,10 +125,18 @@ gulp.task 'watch', ->
   gulp.watch 'src/**/*.html', [ 'templates' ]
   gulp.watch 'src/**/*.less', [ 'less' ]
 
+gulp.task 'environment', ->
+  env = yargs.env or 'development'
+  filename = "#{env}.json"
+  filePath = path.resolve("./config/#{filename}")
+  configFile = JSON.parse fs.readFileSync(filePath, 'utf8')
+  fs.writeFile(path.resolve("./src/config.json"), JSON.stringify configFile)
+
 # development task
 gulp.task 'default', [
   'server'
   'watch'
+  'environment'
   'index'
   'templates'
   'bower_styles'
@@ -134,9 +145,13 @@ gulp.task 'default', [
   'coffee'
 ]
 
+
+
+
 # production task
 gulp.task 'production', [
   'watch'
+  'environment'
   'templates'
   'bower_styles'
   'less'

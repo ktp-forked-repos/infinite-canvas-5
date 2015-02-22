@@ -5,13 +5,11 @@ http          = require 'http'
 path          = require 'path'
 # passport      = require 'passport'
 mongoose      = require 'mongoose'
-config        = require './config'
+config        = require "./config" 
 # toobusy       = require 'toobusy'
 
 app = express.createServer()
 io = require('socket.io')(app)
-
-
 
 
 #setup the session store

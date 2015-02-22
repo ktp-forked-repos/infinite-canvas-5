@@ -6,6 +6,7 @@ require './app/state/index'
 require './common/canvas/index'
 require './common/spot/index'
 require './common/utils/index'
+config = require './config.json'
 
 angular
   .module('application', [
@@ -24,7 +25,5 @@ angular
     'quickstartApp.state' 
 
   ])
-  # .constant('BASEURL', 'http://localhost:9000')
-  # .constant('BASEHOST', 'http://localhost:5000')
-  .constant('BASEURL', 'http://5caf19d0.ngrok.com')
-  .constant('BASEHOST', 'http://56167789.ngrok.com')
+  .constant('BASEURL', config.baseurl)
+  .constant('BASEHOST', config.basehost)

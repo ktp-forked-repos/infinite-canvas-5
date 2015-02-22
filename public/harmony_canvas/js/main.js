@@ -39,10 +39,9 @@ function getCanvasDrawingData(){
 }
 
 function onWindowMessage(event){
-    if (event.origin !== "http://56167789.ngrok.com") 
+    // if (event.origin !== "http://56167789.ngrok.com") 
     // if (event.origin !== "http://localhost:5000") 
-        return;
-    console.log('canvas:window saveCanvasDrawingData')
+        // return;
     window.removeEventListener("message", onWindowMessage, false);
     event.source.postMessage( getCanvasDrawingData(), event.origin );
 }

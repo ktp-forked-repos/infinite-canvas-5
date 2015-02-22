@@ -6,8 +6,9 @@
     "coffee-script": "^1.9.0",
     "express": "2.5.10",
     "jade": ">= 0.26.1",
-    "socket.io": ">= 0.9.6",
-    "mongoose": "latest"
+    "mongodb": "^1.4.31",
+    "mongoose": "^3.8.23",
+    "socket.io": ">= 0.9.6"
   },
   "devDependencies": {
     "coffeeify": "latest",
@@ -36,6 +37,8 @@
     "gulp-uglify": "^1.1.0",
     "gulp-uglifyjs": "^0.5.0",
     "gulp-util": "^3.0.2",
-    "tiny-lr": "^0.1.5"
+    "path": "^0.11.14",
+    "tiny-lr": "^0.1.5",
+    "yargs": "^3.2.1"
   }
 }
