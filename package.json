@@ -6,7 +6,8 @@
     "coffee-script": "^1.9.0",
     "express": "2.5.10",
     "jade": ">= 0.26.1",
-    "socket.io": ">= 0.9.6"
+    "socket.io": ">= 0.9.6",
+    "mongoose": "latest"
   },
   "devDependencies": {
     "coffeeify": "latest",
