@@ -8,6 +8,7 @@
     "jade": ">= 0.26.1",
     "mongodb": "^1.4.31",
     "mongoose": "^3.8.23",
+    "passport": "^0.2.1",
     "socket.io": ">= 0.9.6"
   },
   "devDependencies": {
