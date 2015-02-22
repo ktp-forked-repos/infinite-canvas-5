@@ -65,10 +65,6 @@ app.configure 'development', ->
 # config express in production environment
 app.configure 'production', ->
 
-  app.db.on 'error', console.error.bind(console, 'mongoose connection error: ')
-  app.db.once 'open', ->
-    console.log "mongodb connected" , config.mongodb.uri
-
 # Start Server
 app.listen 9000, ->
   console.log "server running on port 9000"
