@@ -1,0 +1,196 @@
+body {
+  // background: #1A0D0D;
+  background-color: rgb(244, 244, 244);
+  color: #fff;
+}
+
+
+//   CANVAS 
+.canvas_wrapper {
+  min-width:100%;
+  min-height:100%;
+  overflow: hidden;
+}
+
+
+//   CANVAS NAVIGATOR
+.navigator {
+  position: absolute;
+  z-index: 1000;
+  background: #222;
+  opacity: 0.7;
+  color:black;
+  font-size: 1.5em;
+  padding:10px;
+}
+
+//   CANVAS ROWS
+
+.canvas_wrapper .row {
+  // display: inline-flex;
+  margin:0;
+}
+
+//   DRAWING SPOTS 
+
+.spot_wrapper {
+  float:left;
+  // outline:1px dotted #ccc;
+}
+img.drawing {
+  width: 150px;
+  height: 194px;
+}
+
+.canvas {
+  height:100%;
+}
+
+.canvas_subviews {
+}
+
+.spot {
+  width: 150px;
+  height: 194px;
+}
+.hovered .spot_wrapper {
+  border: 1px solid #3D3D3D;
+}
+.spot_wrapper {
+  width: 150px;
+  height: 194px;
+}
+
+.drawing.connected { 
+  border: 1px solid #3D3D3D;
+  
+}
+
+.drawing {
+  display:block;
+  width: 150px;
+  height: 194px;
+}
+.artist, .toolbar {
+  display:none;
+}
+
+.hovered .artist {
+  display: block;
+  /*width:125%;*/
+  padding: 6px 6px;
+  background: #272727;
+  border-top: 1px solid #3D3D3D;
+  margin:4px;
+  text-align: center;
+  opacity:0.7;
+}
+
+.hovered .anchor {
+  position: relative;
+  display:block;
+  width:16px;
+  height:16px;
+  background: url('loaders/pin.png') no-repeat;
+}
+
+.hovered .toolbar {
+  display:block;
+  position:absolute;
+  // use less positionToolbar
+  z-index: 100;
+  bottom:4px;
+  width:150px;
+  height: 28px;
+  background: #272727;
+  border-top: 1px solid #3D3D3D;
+  line-height: 20px;
+  overflow: hidden;
+  text-align: center;
+  padding: 3px 4px 4px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.hovered .toolbar a{
+  color: #CCC;
+  font-weight: 300;
+  padding-left: 20px;
+  text-decoration: none;
+}
+.hovered .toolbar a:hover{
+  color: #fffff0;
+}
+.hovered .anchor:hover {
+  width:16px;
+  height:16px;
+  background: url('loaders/pin2.png') no-repeat;
+}
+
+.hovered .artist:hover {
+  opacity:0.9;
+}
+
+.hovered .artist a {
+  text-decoration: none;
+  color: #CCC;
+}
+
+.drawingFrame {
+  /*position:absolute;  */
+  width: 150px;
+  height: 194px;
+}
+.drawingCanvas {
+  display: table-cell;
+    vertical-align: middle;
+  width: 150px;
+  height: 194px;
+}
+.drawingCanvas img.loader {
+  margin: 0 auto;
+  display:block;
+  width:30px;
+  height:30px;
+}
+.connected img.loader {
+  visibility:hidden;
+}
+.drawingInfo {
+  position:absolute;
+  height:194px;
+  width:150px;
+}
+
+
+
+
+// drawing frame animation
+// 
+.modal-title {
+  color: #222;
+}
+ .am-fade.modal-backdrop {
+  background-color: rgba(0,0,0,0.5);
+  width:100%;
+  height:100%;
+}
+
+.modal-backdrop.am-fade {
+  // opacity: .5;
+  transition: opacity .15s linear;
+  &.ng-enter {
+    opacity: 0;
+    &.ng-enter-active {
+      opacity: .5;
+    }
+  }
+  &.ng-leave {
+    opacity: .5;
+    &.ng-leave-active {
+      opacity: 0;
+    }
+  }
+}
+
