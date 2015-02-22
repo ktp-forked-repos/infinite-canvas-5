@@ -1,74 +1,71 @@
 # Load Dependencies
-express       = require 'express'
-# mongoStore    = require('connect-mongo')(express)
-http          = require 'http'
-path          = require 'path'
-passport      = require 'passport'
-mongoose      = require 'mongoose'
-config        = require "./config" 
-# toobusy       = require 'toobusy'
+express           = require 'express'
+# mongoStore      = require('connect-mongo')(express)
+http              = require 'http'
+path              = require 'path'
+passport          = require 'passport'
+mongoose          = require 'mongoose'
+config            = require "./config" 
+# toobusy           = require 'toobusy'
+logger            = require('morgan')
+session           = require('express-session')
+bodyParser        = require('body-parser')
+cookieParser      = require('cookie-parser')
 
-app = express.createServer()
-io = require('socket.io')(app)
-app.set('PORT', 9000)
+app = express()
+app.set('port', process.env.PORT || 5000);
+
+socketIO = http.createServer()
+io = require('socket.io')(socketIO)
+
 app.db = mongoose.createConnection(config.mongodb.uri)
-require('./models')(app, mongoose)
-
 app.db.on 'error', console.error.bind(console, 'mongoose connection error: ')
 app.db.once 'open', ->
   console.log "mongodb connected" , config.mongodb.uri
+
+require('./models')(app, mongoose)
+
 #setup the session store
 # app.sessionStore = new mongoStore({ url: config.mongodb.uri })
 
-# Configure app
-app.configure ->
-  ### 
-   Use PREEMPTIVE LIMITING to avoid application failure dur to exceeded request capacity by orders of magnitude
-  ###
+### 
+ Use PREEMPTIVE LIMITING to avoid application failure dur to exceeded request capacity by orders of magnitude
+###
+# app.use (req, res, next) ->
+#   if toobusy()
+#     res.send(503, "I'm busy right now, sorry.")
+#   else 
+#     next()
 
-  # app.use (req, res, next) ->
-  #   if toobusy()
-  #     res.send(503, "I'm busy right now, sorry.")
-  #   else 
-  #     next()
-  
-  # middleware
-  app.use express.favicon(__dirname + '/public/favicon.ico')
-  app.use express.logger('dev')
-  app.use express.bodyParser()
-  app.use express.methodOverride()
-  app.use express.cookieParser()
-  app.use express.static("#{__dirname}/public")
-  # allow cors
-  app.use (req, res, next) ->
-    res.header("Access-Control-Allow-Origin", "*")
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-    next()
-  # app.use express.session
-  #   secret: config.cryptoKey
-  #   store: app.sessionStore
-  # app.use passport.initialize()
-  # app.use passport.session()
-  app.use app.router
-  routes        = require('./routes')(app)
+# Configure app middleware
+app.use logger('dev')
+app.use express.static("#{__dirname}/public")
+app.use bodyParser.urlencoded({ extended: true })
+# allow cors
+app.all (req, res, next) ->
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next()
+# app.use express.session
+#   secret: config.cryptoKey
+#   store: app.sessionStore
+# app.use passport.initialize()
+# app.use passport.session()
 
   # global locals
-  app.locals.cacheBreaker = 'br34k-01'
+app.locals.cacheBreaker = 'br34k-01'
 
-# config express in dev environment
-app.configure 'development', ->
-  # Create server and DB connections
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }))
 
-    
-# config express in production environment
-app.configure 'production', ->
-  app.get '/', (req, res, next) ->
-    res.sendfile 'index.html', root: './public'
 # Start Server
-app.listen app.get('PORT'), ->
-  console.log "server running on port #{app.get('PORT')}"
+app.listen app.get('port'), ->
+  console.log "server running on port #{app.get('port')}"
+
+# config express in production environment
+app.get '/', (req, res, next) ->
+  res.sendfile 'index.html', root: './public'
+
+routes        = require('./routes')(app)
 
 online = 0
 # listen to socket connections
