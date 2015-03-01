@@ -26,7 +26,7 @@ livereloadport  = 35729
 serverport      = 5000
 
 # Set up an express server 
-server = express.createServer()
+server = express()
 # Add live reload
 server.use livereload({port: livereloadport}) 
 # Use our 'public' folder as rootfolder
@@ -144,8 +144,6 @@ gulp.task 'default', [
   'bower_scripts'
   'coffee'
 ]
-
-
 
 
 # production task

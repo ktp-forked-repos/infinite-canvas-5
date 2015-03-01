@@ -13,10 +13,10 @@ bodyParser        = require('body-parser')
 cookieParser      = require('cookie-parser')
 
 app = express()
-app.set('port', process.env.PORT || 5000);
-
-socketIO = http.createServer()
-io = require('socket.io')(socketIO)
+app.set('port', process.env.PORT || 3000);
+socketIO = http.Server(app)
+socketIO.listen(5000)
+io = require('socket.io').listen(socketIO)
 
 app.db = mongoose.createConnection(config.mongodb.uri)
 app.db.on 'error', console.error.bind(console, 'mongoose connection error: ')
@@ -42,8 +42,9 @@ app.use logger('dev')
 app.use express.static("#{__dirname}/public")
 app.use bodyParser.urlencoded({ extended: true })
 # allow cors
-app.all (req, res, next) ->
-  res.header("Access-Control-Allow-Origin", "*")
+app.use (req, res, next) ->
+  res.header("Access-Control-Allow-Origin", "http://localhost:5000")
+  res.header('Access-Control-Allow-Credentials', 'true')
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
   next()
