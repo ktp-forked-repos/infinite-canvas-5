@@ -7,7 +7,5 @@ angular.module('quickstartApp.common.spot.directives.DrawingCanvasDirective', []
       
       scope._initDrawingPad = =>
         iWindow = elem.find('.drawingCanvasFrame')        
-        console.log 'contextWindow', angular.element(iWindow)[0]
-        console.log 'contextWindow', angular.element(iWindow).contentWindow
 
       scope._initDrawingPad()

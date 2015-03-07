@@ -3,6 +3,7 @@ mongoose = require 'mongoose'
 # Spot Controller
 module.exports = 
   createSpot: (req, res, next) =>
+    console.log 'createSpot', req.body
     req.body.data._id = new mongoose.Types.ObjectId()
     req.app.db.models.Drawing 
       .create req.body.data, (err, result) =>

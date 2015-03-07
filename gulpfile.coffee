@@ -11,7 +11,7 @@ ngAnnotate      = require 'gulp-ng-annotate'
 uglify          = require 'gulp-uglifyjs'
 sourcemaps      = require 'gulp-sourcemaps'
 less            = require 'gulp-less' 
-yargs           = require 'yargs'
+yargs           = require('yargs').argv
 path            = require 'path'
 fs              = require 'fs'
 
