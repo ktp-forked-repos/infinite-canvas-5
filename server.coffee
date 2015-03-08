@@ -14,7 +14,7 @@ cookieParser      = require('cookie-parser')
 
 app = express()
 app.set('port', process.env.PORT || 3000);
-socketIO = http.createServer(app)
+socketIO = http.Server(app)
 socketIO.listen(5000)
 io = require('socket.io').listen(socketIO)
 
@@ -38,7 +38,7 @@ require('./models')(app, mongoose)
 #     next()
 
 # Configure app middleware
-# app.use logger('dev')
+app.use logger('dev')
 app.use express.static("#{__dirname}/public")
 app.use bodyParser.urlencoded({ extended: true })
 app.use bodyParser.json({limit: '10mb'})
@@ -72,7 +72,7 @@ routes        = require('./routes')(app)
 online = 0
 # listen to socket connections
 
-io.set 'origins', 'http://infinite-canvases.herokuapp.com'
+# io.set 'origins', '*'
 canvasPool = io.of('/LiveCanvas').on 'connection', (socket) ->
   online++
   console.log 'online', online
