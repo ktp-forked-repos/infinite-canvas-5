@@ -1,4 +1,4 @@
 {
-  "baseurl": "http://infinite-canvases.herokuapp.com",
+  "baseurl": "http://infinite-canvases.herokuapp.com:5000",
   "basehost": "http://infinite-canvases.herokuapp.com"
 }
