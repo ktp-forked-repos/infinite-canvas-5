@@ -1,5 +1,5 @@
 angular.module('quickstartApp.common.spot.directives.CanvasSpotDirective', [])
-  .directive 'canvasSpot', ($rootScope, $compile, $modal, $window, BASEHOST) ->
+  .directive 'canvasSpot', ($rootScope, $compile, $modal, $window, BASEURL) ->
     restrict: 'A'
     link: (scope, elem, attr) ->
 
@@ -25,7 +25,7 @@ angular.module('quickstartApp.common.spot.directives.CanvasSpotDirective', [])
 
       scope.saveDrawing = (data) =>
         # $window.frames[0].postMessage 'save.frame', 'http://184df69f.ngrok.com'
-        $window.frames[0].postMessage 'save.frame', BASEHOST
+        $window.frames[0].postMessage 'save.frame', BASEURL
 
       scope._unreserveSpot = (data) =>
         scope.$emit 'spot:unlock', data

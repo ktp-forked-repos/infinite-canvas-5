@@ -73,9 +73,7 @@ online = 0
 # listen to socket connections
 
 # io.set 'origins', '*'
-socketIO.configure ->
-  socketIO.set 'transports', ['websocket']
-  
+# io.set 'transports', ['xhr-polling']
 canvasPool = io.of('/LiveCanvas').on 'connection', (socket) ->
   online++
   console.log 'online', online
