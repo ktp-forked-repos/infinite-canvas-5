@@ -16,8 +16,8 @@ app = express()
 app.set('port', process.env.PORT || 3000);
 socketIO = http.createServer(app)
 io = require('socket.io').listen(socketIO)
-socketIO.listen 5000, ->
-  console.log "socket.io running on port 5000"
+# io.listen 5000, ->
+#   console.log "socket.io running on port 5000"
 # socketIO.listen 5000
 app.db = mongoose.createConnection(config.mongodb.uri)
 app.db.on 'error', console.error.bind(console, 'mongoose connection error: ')
@@ -61,7 +61,7 @@ app.locals.cacheBreaker = 'br34k-01'
 
 
 # Start Server
-app.listen app.get('port'), ->
+socketIO.listen app.get('port'), ->
   console.log "server running on port #{app.get('port')}"
 
 # config express in production environment
