@@ -17,13 +17,33 @@ body {
 .navigator {
   position: absolute;
   z-index: 1000;
-  background: #222;
-  opacity: 0.7;
+  background: #929192;
+  opacity: 0.9;
   color:black;
   font-size: 1.5em;
   padding:10px;
+  border-radius: 15px;
 }
-
+.navigator img{ 
+  width:40px;
+  height:auto;
+}
+.navigator.up-arrow{
+  top:0px;
+  left:49%;
+}
+.navigator.down-arrow{
+  bottom:0px;
+  left:49%;
+}
+.navigator.left-arrow{
+  top:49%;
+  left:0;
+}
+.navigator.right-arrow{
+  top:49%;
+  right:0;
+}
 //   CANVAS ROWS
 
 .canvas_wrapper .row {

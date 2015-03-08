@@ -1,13 +1,19 @@
 
 <div class="canvas_wrapper canvas" class="container">
-  <div class="navigator"> 
-    <button ng-mouseenter="addColumnInterval('left')" ng-mouseleave="stopInterval()">  left  </button>
-    <button ng-mouseenter="addColumnInterval('right')" ng-mouseleave="stopInterval()">  right  </button>
-    <button ng-mouseenter="addRowInterval('up')" ng-mouseleave="stopInterval()">  up  </button>
-    <button ng-mouseenter="addRowInterval('down')" ng-mouseleave="stopInterval()">  down  </button>
+  <div class="navigator left-arrow"> 
+    <div ng-mouseenter="addColumnInterval('left')" ng-mouseleave="stopInterval()">  <img src="/css/img/arrow-left.png">   </div>
+  </div>   
+  <div class="navigator right-arrow"> 
+    <div ng-mouseenter="addColumnInterval('right')" ng-mouseleave="stopInterval()">  <img src="/css/img/arrow-right.png">   </div>
+  </div>   
+  <div class="navigator up-arrow"> 
+    <div ng-mouseenter="addRowInterval('up')" ng-mouseleave="stopInterval()">  <img src="/css/img/arrow-up.png">  </div>
+  </div>   
+  <div class="navigator down-arrow"> 
+    <div ng-mouseenter="addRowInterval('down')" ng-mouseleave="stopInterval()">  <img src="/css/img/arrow-down.png">  </div>
+  </div>   
     <!-- <button ng-click="zoomIn()">  Zoom IN  </button> -->
     <!-- <button ng-click="zoomOut()">  Zoom OUT  </button> -->
-  </div>   
   <div class="canvas_subviews">
     <div ng-repeat="row in spots.rows" class="row"> 
       <spot-tile class="spot" spot-opts="spot" canvas-spot ng-repeat="spot in row.tiles"> 
