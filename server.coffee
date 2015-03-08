@@ -14,7 +14,8 @@ cookieParser      = require('cookie-parser')
 
 app = express()
 app.set('port', process.env.PORT || 3000);
-socketIO = http.createServer()
+socketIO = http.createServer (req, res) ->
+  console.log '[sock] req', req
 socketIO.listen(5000)
 io = require('socket.io').listen(socketIO)
 
