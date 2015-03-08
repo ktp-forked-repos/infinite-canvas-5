@@ -72,7 +72,7 @@ routes        = require('./routes')(app)
 online = 0
 # listen to socket connections
 
-# io.set 'origins', '*'
+io.set 'origins', '*'
 canvasPool = io.of('/LiveCanvas').on 'connection', (socket) ->
   online++
   console.log 'online', online
