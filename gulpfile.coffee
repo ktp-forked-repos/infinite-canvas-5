@@ -114,7 +114,7 @@ gulp.task 'bower_styles', ->
   gulp.src([
     './bower_components/bootstrap/dist/css/bootstrap.css'
     './bower_components/angular-motion/dist/angular-motion.css'
-  ]).pipe concat 'vendor.build.css'
+  ]).pipe concat 'vendor.css'
   .pipe gulp.dest './public/css/'
   .pipe notify {'title': 'Quickstart Service', message: 'Vendor Styles Generated Successfully'}
 
