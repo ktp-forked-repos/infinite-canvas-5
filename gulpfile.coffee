@@ -23,7 +23,7 @@ lrserver        = require('tiny-lr')()
 express         = require('express')
 livereload      = require('connect-livereload')
 livereloadport  = 35729
-serverport      = 5000
+serverport      = 4000
 
 # Set up an express server 
 server = express()

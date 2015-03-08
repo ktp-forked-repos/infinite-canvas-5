@@ -14,8 +14,7 @@ cookieParser      = require('cookie-parser')
 
 app = express()
 app.set('port', process.env.PORT || 3000);
-socketIO = http.createServer (req, res) ->
-  console.log '[sock] req', req
+socketIO = http.createServer(app)
 socketIO.listen(5000)
 io = require('socket.io').listen(socketIO)
 
@@ -46,9 +45,9 @@ app.use bodyParser.json({limit: '10mb'})
 # allow cors
 app.use (req, res, next) ->
   res.header("Access-Control-Allow-Origin", "*")
-  res.header('Access-Control-Allow-Credentials', 'true')
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  # res.header('Access-Control-Allow-Credentials', 'true')
+  # res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  # res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
   next()
 # app.use express.session
 #   secret: config.cryptoKey
