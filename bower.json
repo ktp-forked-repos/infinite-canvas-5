@@ -12,6 +12,7 @@
     "angular-mocks": "~1.3.13",
     "angular-socket-io": "~0.7.0",
     "socket.io-client": "~1.3.4",
-    "bootstrap": "~3.3.2"
+    "bootstrap": "~3.3.2",
+    "font-awesome": "~4.3.0"
   }
 }

@@ -13,12 +13,9 @@ bodyParser        = require('body-parser')
 cookieParser      = require('cookie-parser')
  
 app = express()
-app.set('port', process.env.PORT || 3000);
 socketIO = http.createServer(app)
 io = require('socket.io').listen(socketIO)
-# io.listen 5000, ->
-#   console.log "socket.io running on port 5000"
-# socketIO.listen 5000
+
 app.db = mongoose.createConnection(config.mongodb.uri)
 app.db.on 'error', console.error.bind(console, 'mongoose connection error: ')
 app.db.once 'open', ->
@@ -26,8 +23,9 @@ app.db.once 'open', ->
 
 require('./models')(app, mongoose)
 
-#setup the session store
+#setup the session & store
 # app.sessionStore = new mongoStore({ url: config.mongodb.uri })
+app.set('port', process.env.PORT || 3000);
 
 ### 
  Use PREEMPTIVE LIMITING to avoid application failure dur to exceeded request capacity by orders of magnitude
@@ -73,8 +71,6 @@ routes        = require('./routes')(app)
 online = 0
 # listen to socket connections
 
-# io.set 'origins', '*'
-# io.set 'transports', ['websocket','xhr-polling']
 canvasPool = io.of('/LiveCanvas').on 'connection', (socket) ->
   online++
   console.log 'online', online

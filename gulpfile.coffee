@@ -114,9 +114,14 @@ gulp.task 'bower_styles', ->
   gulp.src([
     './bower_components/bootstrap/dist/css/bootstrap.css'
     './bower_components/angular-motion/dist/angular-motion.css'
+    './bower_components/font-awesome/css/font-awesome.css'
   ]).pipe concat 'vendor.css'
   .pipe gulp.dest './public/css/'
   .pipe notify {'title': 'Quickstart Service', message: 'Vendor Styles Generated Successfully'}
+  gulp.src([
+    './bower_components/font-awesome/fonts/*'
+  ])
+  .pipe gulp.dest './public/fonts/'
 
 # watch source files and rebuild when changed
 gulp.task 'watch', ->
